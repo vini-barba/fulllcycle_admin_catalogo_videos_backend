@@ -8,13 +8,15 @@ describe("Unit test Object utils", () => {
     }).toThrow(
       "Cannot assign to read only property 'nested' of object '#<Object>'"
     );
+    expect(v.field.nested).toBe("test");
 
-    const inputDate = { field: { nested: new Date() } };
-    const v1 = deepFreeze(inputDate);
+    const inputString = { field: "test" };
+    const v2 = deepFreeze(inputString);
     expect(() => {
-      v1.field.nested = new Date();
+      v2.field = "test2";
     }).toThrow(
-      "Cannot assign to read only property 'nested' of object '#<Object>'"
+      "Cannot assign to read only property 'field' of object '#<Object>'"
     );
+    expect(v2.field).toBe("test");
   });
 });
