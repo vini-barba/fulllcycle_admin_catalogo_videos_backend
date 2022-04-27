@@ -4,7 +4,7 @@
   "description": "backend do admin de catálogo de videos",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "tsc": "tsc",
     "ts-node": "ts-node"
   },
@@ -12,8 +12,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@swc/core": "^1.2.171",
+    "@swc/jest": "^0.2.20",
+    "@types/jest": "^27.4.1",
     "@types/node": "^14.15.4",
+    "@types/uuid": "^8.3.4",
+    "jest": "^27.5.1",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
   }
 }
