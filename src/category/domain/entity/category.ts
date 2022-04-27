@@ -1,5 +1,7 @@
 import CategoryInterface, { CategoryProps } from "./category.interface";
 import Entity from "../../../@shared/domain/entity/entity.abstract";
+import CategoryValidatorFactory from "../factory/category.validator.factory";
+import EntityValidationError from "../../../@shared/errors/validation.error";
 
 export default class Category
   extends Entity<CategoryProps>
@@ -16,6 +18,15 @@ export default class Category
     this.description = props.description;
     this.isActive = props.isActive;
     this.createdAt = props.createdAt;
+    this.validate();
+  }
+
+  validate() {
+    const validator = CategoryValidatorFactory.create();
+    validator.validate(this);
+    if (!validator.isValid) {
+      throw new EntityValidationError(validator.errors);
+    }
   }
 
   get name(): string {
@@ -69,5 +80,6 @@ export default class Category
   public update(_name: string, _description: string): void {
     this.name = _name;
     this.description = _description;
+    this.validate();
   }
 }

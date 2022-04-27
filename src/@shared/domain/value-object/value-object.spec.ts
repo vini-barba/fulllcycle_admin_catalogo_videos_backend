@@ -22,6 +22,8 @@ describe("Test ValueObject", () => {
     };
     const date = new Date();
     const arrange = [
+      { input: null, expected: "null" },
+      { input: undefined, expected: "undefined" },
       { input: "", expected: "" },
       { input: "test 0", expected: "test 0" },
       { input: 0, expected: "0" },
