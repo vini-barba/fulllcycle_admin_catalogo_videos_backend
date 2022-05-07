@@ -1,4 +1,3 @@
-import EntityValidationError from "../../../@shared/errors/validation.error";
 import Category from "./category";
 
 describe("Integration test Category", () => {
