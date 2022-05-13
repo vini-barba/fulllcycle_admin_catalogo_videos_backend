@@ -1,4 +1,4 @@
-import { objectContaining } from "expect";
+import expect from "expect";
 import EntityValidationError from "../../errors/validation.error";
 import { FieldErrors } from "../validator/validator.interface";
 import ValidatorClassValidator from "../validator/validator.class-validator.abstract";
@@ -38,7 +38,7 @@ function assertContainsErrorsMessages(
   expected: FieldErrors,
   received: FieldErrors
 ) {
-  const isMatch = objectContaining(received).asymmetricMatch(expected);
+  const isMatch = expect.objectContaining(received).asymmetricMatch(expected);
 
   return isMatch
     ? { pass: true, message: () => "" }

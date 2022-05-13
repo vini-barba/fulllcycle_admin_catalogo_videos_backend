@@ -11,14 +11,14 @@ describe("Test InMemoryRepository", () => {
       this["props"] = { ...this.props, ...props };
     }
   };
-  class StubInMemoryRepository extends InMemoryRepository<StubProps> {}
+  class StubInMemoryRepository extends InMemoryRepository<StubProps> { }
   let stubInMemoryRepository: InMemoryRepository<StubProps>;
-  const item1 = new StubProps( {
+  const item1 = new StubProps({
     id: "1",
     name: "test",
     price: 1,
   });
-  const item2 =  new StubProps( {
+  const item2 = new StubProps({
     id: "2",
     name: "test2",
     price: 2,
@@ -30,16 +30,17 @@ describe("Test InMemoryRepository", () => {
 
   describe("insert", () => {
     it("should insert a new item", async () => {
- 
+
       await stubInMemoryRepository.insert(item1);
       expect(stubInMemoryRepository.items.length).toBe(1);
       expect(stubInMemoryRepository.items[0]).toEqual(item1);
     });
+
     it("should throw an error if the item already exists", async () => {
       await stubInMemoryRepository.insert(item1);
       expect(stubInMemoryRepository.items.length).toBe(1);
       expect(stubInMemoryRepository.items[0]).toEqual(item1);
-      await expect(stubInMemoryRepository.insert(item1)).rejects.toThrowError(
+      await expect(() => stubInMemoryRepository.insert(item1)).rejects.toThrowError(
         "Item with id 1 already exists"
       );
     });
@@ -48,12 +49,12 @@ describe("Test InMemoryRepository", () => {
   describe("update", () => {
     it("should update an existing item", async () => {
       await stubInMemoryRepository.insert(item1);
-      const updatedItem =  {
+      const updatedItem = {
         name: "updated",
         price: 2,
       };
       item1.update(updatedItem);
-      const expected = new StubProps({id: "1", ...updatedItem});
+      const expected = new StubProps({ id: "1", ...updatedItem });
       await stubInMemoryRepository.update(item1);
       expect(stubInMemoryRepository.items[0].id).toEqual(expected.id);
       expect(stubInMemoryRepository.items[0].name).toEqual(expected.name);

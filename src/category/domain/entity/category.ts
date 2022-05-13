@@ -35,6 +35,7 @@ export default class Category
 
   private set name(_name: string) {
     this._name = _name;
+    this.props.name =  this._name;
   }
 
   get description(): string | null {
@@ -47,6 +48,7 @@ export default class Category
     } else {
       this._description = null;
     }
+    this.props.description = this._description;
   }
 
   get isActive(): boolean {
@@ -57,6 +59,7 @@ export default class Category
     if (_isActive !== undefined) {
       this._isActive = _isActive;
     }
+    this.props.isActive = this._isActive;
   }
 
   get createdAt(): Date {
@@ -67,6 +70,7 @@ export default class Category
     if (_createdAt !== undefined) {
       this._createdAt = _createdAt;
     }
+    this.props.createdAt = this._createdAt;
   }
 
   public activate() {

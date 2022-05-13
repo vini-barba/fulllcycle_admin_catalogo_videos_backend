@@ -21,14 +21,17 @@ export default {
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
+  // collectCoverageFrom: [
+  //   "<rootDir>/**/*.ts"
+  // ],
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: "../coverage",
+  coverageDirectory: "<rootDir>/../coverage",
 
   // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  coveragePathIgnorePatterns: [
+    "/node_modules/"
+  ],
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: "v8",
@@ -42,14 +45,14 @@ export default {
   ],
 
   // An object that configures minimum threshold enforcement for coverage results
-  // coverageThreshold: {
-  //   global: {
-  //     branches: 80,
-  //     functions: 100,
-  //     lines: 80,
-  //     statements: 80,
-  //   },
-  // },
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 100,
+      lines: 80,
+      statements: 80,
+    },
+  },
 
   // A path to a custom dependency extractor
   // dependencyExtractor: undefined,
@@ -78,17 +81,20 @@ export default {
   // ],
 
   // An array of file extensions your modules use
-  // moduleFileExtensions: [
-  //   "js",
+  moduleFileExtensions: [
+    "js",
   //   "jsx",
-  //   "ts",
+    "ts",
   //   "tsx",
   //   "json",
   //   "node"
-  // ],
+  ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},
+  moduleNameMapper: {
+    "^src/(.*)$": "<rootDir>/$1"
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -101,6 +107,7 @@ export default {
 
   // A preset that is used as a base for Jest's configuration
   // preset: undefined,
+  
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -179,7 +186,9 @@ export default {
   transform: {
     "^.+.(t)sx?$": ["@swc/jest"],
   },
-
+  // transform: {
+  //   '^.+\\.(t|j)s$': 'ts-jest',
+  // },
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
   //   "/node_modules/",
@@ -190,7 +199,7 @@ export default {
   // unmockedModulePathPatterns: undefined,
 
   // Indicates whether each individual test should be reported during the run
-  // verbose: undefined,
+  // verbose: true,
 
   // An array of regexp patterns that are matched against all source file paths before re-running tests in watch mode
   // watchPathIgnorePatterns: [],

@@ -8,15 +8,18 @@ import CategoryInMemoryRepository from "./category.in-memory.repository";
 const category1 = new Category({
   id: "1",
   name: "cat 1",
+  createdAt: new Date()
 });
 const category2 = new Category({
   id: "2",
   name: "name",
+  createdAt: new Date(new Date().getTime() + 100),
 });
 
 const category3 = new Category({
   id: "3",
   name: "cat 3",
+  createdAt: new Date(new Date().getTime() + 1000),
 });
 
 describe("Test CategoryInMemoryRepository", () => {
@@ -109,12 +112,9 @@ describe("Test CategoryInMemoryRepository", () => {
 
     const foundCategories = await repository.search(filter);
     expect(foundCategories.items.length).toBe(3);
-    expect(foundCategories.items[0].id).toBe("1");
-    expect(foundCategories.items[0].name).toBe("cat 1");
+    expect(foundCategories.items[2].id).toBe("1");
     expect(foundCategories.items[1].id).toBe("2");
-    expect(foundCategories.items[1].name).toBe("name");
-    expect(foundCategories.items[2].id).toBe("3");
-    expect(foundCategories.items[2].name).toBe("cat 3");
+    expect(foundCategories.items[0].id).toBe("3");
   })
   
 
@@ -130,9 +130,9 @@ describe("Test CategoryInMemoryRepository", () => {
 
     const foundCategories1 = await repository.search(filter1);
     expect(foundCategories1.items.length).toBe(3);
-    expect(foundCategories1.items[0].id).toBe("1");
+    expect(foundCategories1.items[2].id).toBe("1");
     expect(foundCategories1.items[1].id).toBe("2");
-    expect(foundCategories1.items[2].id).toBe("3");
+    expect(foundCategories1.items[0].id).toBe("3");
   })
 
   it("should sort by field", async()=>{
