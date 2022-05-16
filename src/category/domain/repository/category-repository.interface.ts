@@ -4,7 +4,7 @@ import SearchableRepositoryInterface from "../../../@shared/domain/repository/se
 import Category from "../entity/category";
 
 
-namespace CategoryRepository {
+export namespace CategoryRepository {
   export type Filter = string
   
   export class SearchParams extends GerenalSearchParams<Filter> { }

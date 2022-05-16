@@ -1,6 +1,6 @@
-import CategoryInterface, { CategoryProps } from "../entity/category.interface";
-import UniqueEntityId from "../../../@shared/domain/value-object/unique-entity-id/unique-entity-id";
-import Category from "../entity/category";
+import { CategoryProps } from '../entity/category.interface';
+import UniqueEntityId from '../../../@shared/domain/value-object/unique-entity-id/unique-entity-id';
+import Category from '../entity/category';
 
 export interface CategoryFactoryProps {
   id?: string;
@@ -11,7 +11,7 @@ export interface CategoryFactoryProps {
 }
 
 export default class CategoryFactory {
-  public static create(props: CategoryFactoryProps): CategoryInterface {
+  public static create(props: CategoryFactoryProps): Category {
     const uniqueEntityId = new UniqueEntityId(props.id);
     const id = uniqueEntityId.value;
 

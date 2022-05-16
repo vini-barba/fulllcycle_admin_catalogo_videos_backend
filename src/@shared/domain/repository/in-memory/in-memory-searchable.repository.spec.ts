@@ -68,24 +68,24 @@ describe("Test InMemoryRepository", () => {
   });
 
   describe("applySort method", () => {
-    it("should no sort items", async () => {
+    it("should not sort items", async () => {
       const items = [
-        new StubEntity({id: "id0", name: "b", price: 5 }),
-        new StubEntity({id: "id1", name: "a", price: 5 }),
+        new StubEntity({ id: "id0", name: "b", price: 5 }),
+        new StubEntity({ id: "id1", name: "a", price: 5 }),
       ];
 
       let itemsSorted = await repository["applySort"](items, null, null);
       expect(itemsSorted).toStrictEqual(items);
 
-      itemsSorted = await repository["applySort"](items, "price",SortDirection.ASC);
+      itemsSorted = await repository["applySort"](items, "price", SortDirection.ASC);
       expect(itemsSorted).toStrictEqual(items);
     });
 
     it("should sort items", async () => {
       const items = [
-        new StubEntity({ id: "id0",name: "b", price: 5 }),
-        new StubEntity({ id: "id1",name: "a", price: 5 }),
-        new StubEntity({ id: "id2",name: "c", price: 5 }),
+        new StubEntity({ id: "id0", name: "b", price: 5 }),
+        new StubEntity({ id: "id1", name: "a", price: 5 }),
+        new StubEntity({ id: "id2", name: "c", price: 5 }),
       ];
 
       let itemsSorted = await repository["applySort"](items, "name", SortDirection.ASC);
@@ -93,17 +93,25 @@ describe("Test InMemoryRepository", () => {
 
       itemsSorted = await repository["applySort"](items, "name", SortDirection.DESC);
       expect(itemsSorted).toStrictEqual([items[2], items[0], items[1]]);
+
+      const items2 = [
+        new StubEntity({ id: "id0", name: "a", price: 50 }),
+        new StubEntity({ id: "id1", name: "a", price: 5 }),
+      ]
+      const itemsSorted2 = await repository["applySort"](items2, "name", SortDirection.DESC);
+      expect(itemsSorted2).toStrictEqual([items2[0], items2[1]]);
+
     });
   });
 
   describe("applyPaginate method", () => {
     it("should paginate items", async () => {
       const items = [
-        new StubEntity({ id: "id0",name: "a", price: 5 }),
-        new StubEntity({ id: "id1",name: "b", price: 5 }),
-        new StubEntity({ id: "id2",name: "c", price: 5 }),
-        new StubEntity({ id: "id3",name: "d", price: 5 }),
-        new StubEntity({ id: "id4",name: "e", price: 5 }),
+        new StubEntity({ id: "id0", name: "a", price: 5 }),
+        new StubEntity({ id: "id1", name: "b", price: 5 }),
+        new StubEntity({ id: "id2", name: "c", price: 5 }),
+        new StubEntity({ id: "id3", name: "d", price: 5 }),
+        new StubEntity({ id: "id4", name: "e", price: 5 }),
       ];
 
       let itemsPaginated = await repository["applyPagination"](items, 1, 2);
@@ -122,7 +130,7 @@ describe("Test InMemoryRepository", () => {
 
   describe("search method", () => {
     it("should apply only paginate when other params are null", async () => {
-      const entity = new StubEntity({id:"id0",name: "a", price: 5 });
+      const entity = new StubEntity({ id: "id0", name: "a", price: 5 });
       const items = Array(16).fill(entity);
       repository.items = items;
 
@@ -142,10 +150,10 @@ describe("Test InMemoryRepository", () => {
 
     it("should apply paginate and filter", async () => {
       const items = [
-        new StubEntity({id: "id0", name: "test", price: 5 }),
-        new StubEntity({id: "id1", name: "a", price: 5 }),
-        new StubEntity({id: "id2", name: "TEST", price: 5 }),
-        new StubEntity({id: "id3", name: "TeSt", price: 5 }),
+        new StubEntity({ id: "id0", name: "test", price: 5 }),
+        new StubEntity({ id: "id1", name: "a", price: 5 }),
+        new StubEntity({ id: "id2", name: "TEST", price: 5 }),
+        new StubEntity({ id: "id3", name: "TeSt", price: 5 }),
       ];
       repository.items = items;
 
@@ -182,11 +190,11 @@ describe("Test InMemoryRepository", () => {
 
     it("should apply paginate and sort", async () => {
       const items = [
-        new StubEntity({ id: "id0",name: "b", price: 5 }),
-        new StubEntity({ id: "id1",name: "a", price: 5 }),
-        new StubEntity({ id: "id2",name: "d", price: 5 }),
-        new StubEntity({ id: "id3",name: "e", price: 5 }),
-        new StubEntity({ id: "id4",name: "c", price: 5 }),
+        new StubEntity({ id: "id0", name: "b", price: 5 }),
+        new StubEntity({ id: "id1", name: "a", price: 5 }),
+        new StubEntity({ id: "id2", name: "d", price: 5 }),
+        new StubEntity({ id: "id3", name: "e", price: 5 }),
+        new StubEntity({ id: "id4", name: "c", price: 5 }),
       ];
       repository.items = items;
 
@@ -237,7 +245,7 @@ describe("Test InMemoryRepository", () => {
             page: 2,
             limit: 2,
             sort: "name",
-            sortDir:SortDirection.DESC,
+            sortDir: SortDirection.DESC,
           }),
           result: new SearchResult({
             items: [items[4], items[0]],
@@ -259,11 +267,11 @@ describe("Test InMemoryRepository", () => {
 
     it("should search using filter, sort and paginate", async () => {
       const items = [
-        new StubEntity({ id: "id0",name: "test", price: 5 }),
-        new StubEntity({ id: "id1",name: "a", price: 5 }),
-        new StubEntity({ id: "id2",name: "TEST", price: 5 }),
-        new StubEntity({ id: "id3",name: "e", price: 5 }),
-        new StubEntity({ id: "id4",name: "TeSt", price: 5 }),
+        new StubEntity({ id: "id0", name: "test", price: 5 }),
+        new StubEntity({ id: "id1", name: "a", price: 5 }),
+        new StubEntity({ id: "id2", name: "TEST", price: 5 }),
+        new StubEntity({ id: "id3", name: "e", price: 5 }),
+        new StubEntity({ id: "id4", name: "TeSt", price: 5 }),
       ];
       repository.items = items;
 
